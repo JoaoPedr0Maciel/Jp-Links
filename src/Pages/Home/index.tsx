@@ -1,7 +1,6 @@
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { SocialNetworks } from "../../components/Socialnetworks/SocialNetworks";
 import { db } from "../../services/firebaseConection";
-import { getDocs, collection, orderBy, query } from "firebase/firestore";
 
 interface LinkProps {
   id: string;
@@ -47,23 +46,27 @@ export const Home = () => {
 
       <main className="flex flex-col w-11/12 max-w-xl text-center mt-10">
         {linksDb.map((item) => (
-          <section
+          <a
+            target="_blank"
+            href={item.url}
             key={item.id}
             style={{ background: item.bg }}
             className=" cursor-pointer h-[2.5rem] flex justify-center items-center rounded-lg mb-4 select-none transition-transform hover:scale-105"
           >
-            <a href={item.url} target="_blank">
+            <span>
               <p style={{ color: item.textColor }} className=" font-medium">
                 {item.name}
               </p>
-            </a>
-          </section>
+            </span>
+          </a>
         ))}
-
-        <footer className="flex items center justify-center w-full gap-3 my-4">
-          <SocialNetworks />
-        </footer>
       </main>
+
+      <footer>
+        <p className="text-gray-400 text-xl mt-24">
+          &copy; Criado por João Pedro Maciel
+        </p>
+      </footer>
     </div>
   );
 };
